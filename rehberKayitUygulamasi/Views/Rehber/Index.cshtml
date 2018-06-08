@@ -3,7 +3,12 @@
     ViewBag.Title = "Home Page";
 }
 
-
+<script type="text/javascript">
+    function sil() {
+        (Html.BeginForm("sil", "Rehber", @FormMethod.Post))
+        { @Html.AntiForgeryToken()}
+    }
+</script>
 <td><a class="btn btn-success" href="/rehber/kayitFormu"> Yeni Kişi Oluştur</a></td>
 <h2>Kişi Listesi</h2>
 <table class="table  table-hover">
@@ -15,18 +20,24 @@
     </thead>
 
     <tbody>
+        
         <!–– var olan kayıtları listeler --------------------------------------------------------------------->
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ad</td>
-                <td>@item.soyAd</td>
-                <td>@item.tel</td>
-                <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
-                <td><a class="btn btn-warning" href="/rehber/sil/@item.Id">Sil</a></td>
-            </tr>
-        }
-    </tbody>
+
+        
+
+            @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ad</td>
+            <td>@item.soyAd</td>
+            <td>@item.tel</td>
+            <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
+            
+                <td><a class="btn btn-warning" href="/rehber/sil/@item.Id" >Sil</a></td>
+            
+        </tr>
+}
+</tbody>
 
 </table>
 

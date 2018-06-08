@@ -1,14 +1,15 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using rehberKayitUygulamasi.Models;
+
+
 namespace rehberKayitUygulamasi.Controllers
 {
     public class RehberController : Controller
     {
         
-
         dbRehberimEntities db = new dbRehberimEntities();
-
+        
         // var olan bütün kayıtları gösterir
         public ActionResult Index()
         {
@@ -16,7 +17,7 @@ namespace rehberKayitUygulamasi.Controllers
 
             return View(kayitlistesi);
         }
-
+        
         [HttpGet]
         //yeni kayıt isteği atılınca çalışır
         public ActionResult kayitFormu()
@@ -25,9 +26,10 @@ namespace rehberKayitUygulamasi.Controllers
             
             return View(new tblKayitlar());
         }
-        
 
-        [HttpPost]
+
+
+        [ValidateAntiForgeryToken]
         //post isteği atılırsa çalışır
         public ActionResult kayitFormu(tblKayitlar kayit)
         {
@@ -89,6 +91,8 @@ namespace rehberKayitUygulamasi.Controllers
 
             return RedirectToAction("Index","Rehber");
         }
+
+        
         //formda düzenle butonuna basılınca bu method çağırılır, client tarafında halletmeye çalışacağım olursa
         public ActionResult guncelle(int id)
         {
@@ -100,7 +104,7 @@ namespace rehberKayitUygulamasi.Controllers
 
             return View("kayitFormu",kayit);
         }
-
+        
         //kayıt silme methodu
         public ActionResult sil(int id)
         {

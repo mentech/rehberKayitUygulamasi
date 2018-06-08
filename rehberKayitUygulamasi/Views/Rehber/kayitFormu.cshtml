@@ -30,7 +30,7 @@
 </script>
 @using (Html.BeginForm("kayitFormu", "Rehber", FormMethod.Post))
 {
-
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.ad)
         @Html.TextBoxFor(m => m.ad, new { @maxlength = "50", @class = "form-control", @placeholder = "Ad yazın..." })
