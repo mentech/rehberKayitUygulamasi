@@ -105,6 +105,8 @@ namespace rehberKayitUygulamasi.Controllers
             return View("kayitFormu",kayit);
         }
         
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         //kayıt silme methodu
         public ActionResult sil(int id)
         {

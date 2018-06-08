@@ -32,9 +32,16 @@
             <td>@item.soyAd</td>
             <td>@item.tel</td>
             <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
+
             
-                <td><a class="btn btn-warning" href="/rehber/sil/@item.Id" >Sil</a></td>
-            
+
+            @using (Html.BeginForm("sil", "Rehber", new { id = item.Id }, FormMethod.Post))
+    {
+                @Html.AntiForgeryToken()
+        
+        <td><button type="submit" class="btn btn-warning">Sil</button></td>
+}
+
         </tr>
 }
 </tbody>
