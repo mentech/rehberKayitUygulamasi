@@ -1,0 +1,20 @@
+﻿/* hata mesajlarını kırmızı gösterir 
+
+    kutuları kırmızı border ile gösterir
+*/
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error{
+    border :1.5px solid red;
+}
+.hata{
+    color:red;
+}
+
+
+.boslukAyarlama {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}

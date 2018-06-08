@@ -1,0 +1,33 @@
+﻿@model List<rehberKayitUygulamasi.Models.tblKayitlar>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<td><a class="btn btn-success" href="/rehber/kayitFormu"> Yeni Kişi Oluştur</a></td>
+<h2>Kişi Listesi</h2>
+<table class="table  table-hover">
+    <!–– tablo oluşturur ----------------------------------------------------------------------------------->
+    <thead>
+    <th>Ad</th>
+    <th>Soyad</th>
+    <th>Telefon</th>
+    </thead>
+
+    <tbody>
+        <!–– var olan kayıtları listeler --------------------------------------------------------------------->
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ad</td>
+                <td>@item.soyAd</td>
+                <td>@item.tel</td>
+                <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
+                <td><a class="btn btn-warning" href="/rehber/sil/@item.Id">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
