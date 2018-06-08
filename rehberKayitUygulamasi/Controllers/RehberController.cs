@@ -107,7 +107,7 @@ namespace rehberKayitUygulamasi.Controllers
         
         [ValidateAntiForgeryToken]
         [HttpPost]
-        //kayıt silme methodu
+        //korumalı kayıt silme methodu
         public ActionResult sil(int id)
         {
             
