@@ -20,30 +20,25 @@
     </thead>
 
     <tbody>
-        
         <!–– var olan kayıtları listeler --------------------------------------------------------------------->
 
-        
-
             @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.ad</td>
-            <td>@item.soyAd</td>
-            <td>@item.tel</td>
-            <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
+         {
+            <tr>
+                <td>@item.ad</td>
+                <td>@item.soyAd</td>
+                <td>@item.tel</td>
+                <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
 
             
-
-            @using (Html.BeginForm("sil", "Rehber", new { id = item.Id }, FormMethod.Post))
-    {
-                @Html.AntiForgeryToken()
+                @using (Html.BeginForm("sil", "Rehber", new { id = item.Id }, FormMethod.Post))
+                {
+                  @Html.AntiForgeryToken()
         
-        <td><button type="submit" class="btn btn-warning">Sil</button></td>
-}
-
-        </tr>
-}
+                  <td><button type="submit" class="btn btn-warning">Sil</button></td>
+                }
+            </tr>
+        }
 </tbody>
 
 </table>

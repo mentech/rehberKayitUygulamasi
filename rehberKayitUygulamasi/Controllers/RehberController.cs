@@ -23,13 +23,11 @@ namespace rehberKayitUygulamasi.Controllers
         public ActionResult kayitFormu()
         {
             
-            
             return View(new tblKayitlar());
         }
-
-
-
+        
         [ValidateAntiForgeryToken]
+        [HttpPost]
         //post isteği atılırsa çalışır
         public ActionResult kayitFormu(tblKayitlar kayit)
         {
@@ -43,6 +41,7 @@ namespace rehberKayitUygulamasi.Controllers
                 var kayitZatenVar = from b in db.tblKayitlars
                             where (b.tel==kayit.tel)
                             select b;
+                //yeni kaydedilecek kaydın tel numarasının zaten var olup olmadığını kontrol eder
                 if (kayitZatenVar.Count()==0)
                 {
                     
@@ -51,7 +50,7 @@ namespace rehberKayitUygulamasi.Controllers
                 else
                 {
 
-                    ViewBag.HtmlStr = "Telefon numarası zaten kayıtlı!";
+                    ViewBag.HtmlStr = "Bu telefon numarası " + kayitZatenVar.First().ad + " adı ile zaten kayıtlı!";
                     return View("kayitFormu", kayit);
                 }
                 
@@ -91,9 +90,8 @@ namespace rehberKayitUygulamasi.Controllers
 
             return RedirectToAction("Index","Rehber");
         }
-
         
-        //formda düzenle butonuna basılınca bu method çağırılır, client tarafında halletmeye çalışacağım olursa
+        //formda düzenle butonuna basılınca bu method çağırılır
         public ActionResult guncelle(int id)
         {
             var kayit = db.tblKayitlars.Find(id);
@@ -110,32 +108,11 @@ namespace rehberKayitUygulamasi.Controllers
         //korumalı kayıt silme methodu
         public ActionResult sil(int id)
         {
-            
             db.tblKayitlars.Remove(db.tblKayitlars.Find(id));
             db.SaveChanges();
 
             return RedirectToAction("Index", "Rehber");
         }
-
-        //sql de numaraları düzenleyemedim, ama c# ile düzenledim :)
-        public ActionResult numaraDuzenleyici()
-        {
-
-            var liste = db.tblKayitlars.ToList();
-            foreach (var item in liste)
-            {
-                var guncellenecekKayit = db.tblKayitlars.Find(item.Id);
-                guncellenecekKayit.tel=guncellenecekKayit.tel.Replace(".", "");
-                guncellenecekKayit.tel = guncellenecekKayit.tel.Replace(")", "");
-                guncellenecekKayit.tel = guncellenecekKayit.tel.Replace("(", "");
-                guncellenecekKayit.tel = guncellenecekKayit.tel.Replace(" ", "");
-                guncellenecekKayit.tel = guncellenecekKayit.tel.Replace("-", "");
-                
-                db.SaveChanges();
-            }
-            
-
-            return View();
-        }
+        
     }
 }

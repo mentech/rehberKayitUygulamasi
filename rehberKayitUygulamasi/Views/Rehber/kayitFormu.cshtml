@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "kayitFormu";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
+    
 }
 
 <!--stackowerflow dan bulduğum textbox'a sadece int girmeye izin veren function -------------------------------------->
@@ -22,10 +21,8 @@
     // client tarafında kontroller yapılacağı için bu hata mesajınında servise gitmeden gösterilmemesi için yazılmıştır :)
 
     function hataMesajiniSil(){
-        
         document.getElementById("msj").style.display = "none";
         
-    
     }
 </script>
 @using (Html.BeginForm("kayitFormu", "Rehber", FormMethod.Post))
@@ -50,11 +47,9 @@
     <div >
         <h4 class="hata" id="msj">@ViewBag.HtmlStr</h4>
 
-
         <div class="boslukAyarlama">
             <button type="submit" class="btn btn-success" onclick="hataMesajiniSil()">Kaydet</button>
         </div>
-
 
     </div>
     @Html.HiddenFor(m => m.Id)

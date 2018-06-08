@@ -18,6 +18,7 @@ namespace rehberKayitUygulamasi.Models
         public dbRehberimEntities()
             : base("name=dbRehberimEntities")
         {
+
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
