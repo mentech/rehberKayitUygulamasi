@@ -102,14 +102,22 @@ namespace rehberKayitUygulamasi.Controllers
 
             return View("kayitFormu",kayit);
         }
-        
         [ValidateAntiForgeryToken]
         [HttpPost]
-        //korumalı kayıt silme methodu
+        //token ile korumalı kayıt silme methodu
         public ActionResult sil(int id)
         {
-            db.tblKayitlars.Remove(db.tblKayitlars.Find(id));
-            db.SaveChanges();
+            try
+            {
+                db.tblKayitlars.Remove(db.tblKayitlars.Find(id));
+                db.SaveChanges();
+            }
+            catch (System.Exception ex)
+            {
+
+                return View("Index", db.tblKayitlars.ToList());
+            }
+           
 
             return RedirectToAction("Index", "Rehber");
         }

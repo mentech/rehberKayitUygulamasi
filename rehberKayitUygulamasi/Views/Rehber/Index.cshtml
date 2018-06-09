@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
 
 <td><a class="btn btn-success" href="/rehber/kayitFormu"> Yeni Kişi Oluştur</a></td>
 <h2>Kişi Listesi</h2>
@@ -28,12 +32,13 @@
 
 
 
-                @Html.AntiForgeryToken()
+
 
                 <td><button type="submit" class="btn btn-warning btnkaydiSil" data-id="@item.Id" data-isim="@item.ad">Sil</button></td>
 
             </tr>
         }
+
     </tbody>
 
 </table>

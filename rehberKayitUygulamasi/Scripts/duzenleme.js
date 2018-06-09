@@ -21,7 +21,7 @@ $('#dataTables_empty').attr('color', 'red');
 
 // search için jquery nin datatable'ını kullandım
 $(function () {
-    $("#tblKayitlar").DataTable({
+   var clientTablosu= $("#tblKayitlar").DataTable({
         "bPaginate": false,
         "bLengthChange": false,
         "bFilter": true,
@@ -32,7 +32,7 @@ $(function () {
 
             "sProcessing": "İşleniyor...",
             "sLengthMenu": "Sayfada _MENU_ Kayıt Göster",
-            "sZeroRecords": "Rehberinizde bu şekilde kayıtlı birisi bulunamadı. said reiz başkannnnn için  tıklayın ",
+            "sZeroRecords": "Rehberinizde Arama Sonucuna Göre Eşleşen Kayıt Bulunmadı ",
             "sInfo": "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar",
             "sInfoEmpty": "Kayıt Yok",
             "sInfoFiltered": "( _MAX_ Kayıt İçerisinden Bulunan)",
@@ -52,14 +52,27 @@ $(function () {
         var btn = $(this);
         bootbox.confirm(isim+ " adlı kaydı silmek istediğinizden emin misiniz?", function (result) {
             if (result) {
-
+                var form = $('#__AjaxAntiForgeryForm');
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                
                 var id = btn.data("id");
                 $.ajax({
-                    type: "GET",
-                    URL: "/rehber/sil/" + id,
+                    
+                    type: "POST",
+                    url: '/rehber/sil/' + id,
+                    dataType: 'html',
+                    data: {
+                        __RequestVerificationToken: token,
+                        
+                    },
+                    
                     success: function () {
-                        btn.parent().parent().remove();
-                        URL: "/rehber/sil/" + id
+                        //btn.parent().parent().remove();
+                        var row = $(this).closest("tr").get(0);
+                        clientTablosu.row(row).remove();
+                        
+                       
+                       
                     }
                 });
             }
