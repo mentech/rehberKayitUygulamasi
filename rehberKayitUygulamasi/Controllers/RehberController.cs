@@ -64,13 +64,13 @@ namespace rehberKayitUygulamasi.Controllers
                 var guncellenecekKayit = db.tblKayitlars.Find(kayit.Id);
 
                 // hiç değişiklik yapmadan kaydedilirse çalışır, sql e ikide bir istek atmaya gerek yok :) 
-                if (guncellenecekKayit==kayitZatenVar.First())
+                if (kayit==kayitZatenVar.First())
                 {
                     
                     return RedirectToAction("Index");
                 }
                 //aynı kayıt güncellenecekse çalışır
-                if (kayitZatenVar.Count() != 0 && kayitZatenVar.First().Id!=guncellenecekKayit.Id)
+                else if (kayitZatenVar.Count() != 0 && kayitZatenVar.First().Id!=guncellenecekKayit.Id)
                 {
 
                     ViewBag.HtmlStr = "Bu telefon numarası "+kayitZatenVar.First().ad +" adı ile zaten kayıtlı!";
