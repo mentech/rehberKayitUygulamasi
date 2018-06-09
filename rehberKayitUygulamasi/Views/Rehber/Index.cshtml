@@ -5,10 +5,12 @@
 
 <td><a class="btn btn-success" href="/rehber/kayitFormu"> Yeni Kişi Oluştur</a></td>
 <h2>Kişi Listesi</h2>
-<table class="table  table-hover">
+<table class="table  table-hover" id="tblKayitlar">
     <!–– tablo oluşturur ----------------------------------------------------------------------------------->
     <thead>
     <th>Ad</th>
+    <th>Soyad</th>
+    <th>Telefon</th>
     <th>Soyad</th>
     <th>Telefon</th>
     </thead>
@@ -16,24 +18,23 @@
     <tbody>
         <!–– var olan kayıtları listeler --------------------------------------------------------------------->
 
-            @foreach (var item in Model)
-         {
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>@item.ad</td>
                 <td>@item.soyAd</td>
                 <td>@item.tel</td>
                 <td><a class="btn btn-primary" href="/rehber/guncelle/@item.Id">Düzenle</a></td>
 
-            
-                @using (Html.BeginForm("sil", "Rehber", new { id = item.Id }, FormMethod.Post))
-                {
-                  @Html.AntiForgeryToken()
-        
-                  <td><button type="submit" class="btn btn-warning">Sil</button></td>
-                }
+
+
+                @Html.AntiForgeryToken()
+
+                <td><button type="submit" class="btn btn-warning btnkaydiSil" data-id="@item.Id" data-isim="@item.ad">Sil</button></td>
+
             </tr>
         }
-</tbody>
+    </tbody>
 
 </table>
 

@@ -2,29 +2,10 @@
 @{
     ViewBag.Title = "kayitFormu";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
 }
 
-<!--stackowerflow dan bulduğum textbox'a sadece int girmeye izin veren function -------------------------------------->
-<script type="text/javascript">
-    function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode != 46 && charCode > 31
-            && (charCode < 48 || charCode > 57))
-            return false;
 
-        return true;
-    }
-
-    // detayın dibi: eğer kullanıcı zaten kayıtlı olan bir tel numarasını başka adla kaydetmeye çalışırsa hata mesajı gösterilir
-    // sonrasında tel numarasını veya ad kısmını silip tekrar kaydetmeye çalışırsa
-    // client tarafında kontroller yapılacağı için bu hata mesajınında servise gitmeden gösterilmemesi için yazılmıştır :)
-
-    function hataMesajiniSil(){
-        document.getElementById("msj").style.display = "none";
-        
-    }
-</script>
 @using (Html.BeginForm("kayitFormu", "Rehber", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -44,7 +25,7 @@
 
         @Html.ValidationMessageFor(m => m.tel)
     </div>
-    <div >
+    <div>
         <h4 class="hata" id="msj">@ViewBag.HtmlStr</h4>
 
         <div class="boslukAyarlama">
@@ -57,7 +38,7 @@
 }
 
 @section scripts{
-
+    <script src="~/Scripts/duzenleme.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }
