@@ -17,16 +17,15 @@ function hataMesajiniSil() {
     document.getElementById("msj").style.display = "none";
 }
 
-$('#dataTables_empty').attr('color', 'red');
 
 // search için jquery nin datatable'ını kullandım
 $(function () {
-   var clientTablosu= $("#tblKayitlar").DataTable({
+    var clientTablosu = $("#tblKayitlar").DataTable({
         "bPaginate": false,
         "bLengthChange": false,
         "bFilter": true,
         "bInfo": false,
-        "bAutoWidth": false,
+        
         "language": {
            // json u manuel çekip kullandım "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
 
@@ -51,7 +50,8 @@ $(function () {
         var isim = $(this).data("isim");
         var btn = $(this);
         bootbox.confirm(isim+ " adlı kaydı silmek istediğinizden emin misiniz?", function (result) {
-            if (result) {
+            if (result)
+            {
                 var form = $('#__AjaxAntiForgeryForm');
                 var token = $('input[name="__RequestVerificationToken"]', form).val();
                 
@@ -60,22 +60,23 @@ $(function () {
                     
                     type: "POST",
                     url: '/rehber/sil/' + id,
-                    dataType: 'html',
+                    dataType: "html",
                     data: {
                         __RequestVerificationToken: token,
                         
                     },
                     
                     success: function () {
-                        //btn.parent().parent().remove();
-                        var row = $(this).closest("tr").get(0);
-                        clientTablosu.row(row).remove();
+                        $(this).closest("tr").remove();
+                        btn.parent().parent().remove();
                         
-                       
-                       
+                        console.log("kayıt silidni");
+                                              
                     }
                 });
             }
         })
     });
+    
 });
+

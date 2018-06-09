@@ -112,10 +112,10 @@ namespace rehberKayitUygulamasi.Controllers
                 db.tblKayitlars.Remove(db.tblKayitlars.Find(id));
                 db.SaveChanges();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
-                return View("Index", db.tblKayitlars.ToList());
+               
             }
            
 
