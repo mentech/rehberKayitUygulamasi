@@ -3,12 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-<script type="text/javascript">
-    function sil() {
-        (Html.BeginForm("sil", "Rehber", @FormMethod.Post))
-        { @Html.AntiForgeryToken()}
-    }
-</script>
 <td><a class="btn btn-success" href="/rehber/kayitFormu"> Yeni Kişi Oluştur</a></td>
 <h2>Kişi Listesi</h2>
 <table class="table  table-hover">
