@@ -15,10 +15,20 @@ namespace rehberKayitUygulamasi.Models
     
     public partial class dbRehberimEntities : DbContext
     {
-        public dbRehberimEntities()
+        private static dbRehberimEntities dbrehber;
+        private dbRehberimEntities()
             : base("name=dbRehberimEntities")
         {
 
+        }
+
+        public static dbRehberimEntities baglan()
+        {
+            if (dbrehber==null)
+            {
+                dbrehber = new dbRehberimEntities();
+            }
+            return dbrehber;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

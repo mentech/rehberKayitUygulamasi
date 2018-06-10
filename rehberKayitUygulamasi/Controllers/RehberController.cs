@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using rehberKayitUygulamasi.Models;
 
@@ -8,9 +9,10 @@ namespace rehberKayitUygulamasi.Controllers
     public class RehberController : Controller
     {
         
-        dbRehberimEntities db = new dbRehberimEntities();
+        dbRehberimEntities db = dbRehberimEntities.baglan();
         
         // var olan bütün kayıtları gösterir
+        //[OutputCache(Duration =20)]
         public ActionResult Index()
         {
            var kayitlistesi= db.tblKayitlars.ToList();
@@ -31,6 +33,7 @@ namespace rehberKayitUygulamasi.Controllers
         //post isteği atılırsa çalışır
         public ActionResult kayitFormu(tblKayitlar kayit)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(kayit);
@@ -64,7 +67,7 @@ namespace rehberKayitUygulamasi.Controllers
                 var guncellenecekKayit = db.tblKayitlars.Find(kayit.Id);
 
                 // hiç değişiklik yapmadan kaydedilirse çalışır, sql e ikide bir istek atmaya gerek yok :) 
-                if (kayit==kayitZatenVar.First())
+                if (kayit==kayitZatenVar.FirstOrDefault())
                 {
                     
                     return RedirectToAction("Index");
@@ -94,6 +97,7 @@ namespace rehberKayitUygulamasi.Controllers
         //formda düzenle butonuna basılınca bu method çağırılır
         public ActionResult guncelle(int id)
         {
+           
             var kayit = db.tblKayitlars.Find(id);
             if (kayit==null)
             {
@@ -121,6 +125,7 @@ namespace rehberKayitUygulamasi.Controllers
 
             return RedirectToAction("Index", "Rehber");
         }
-        
+
+    
     }
 }
